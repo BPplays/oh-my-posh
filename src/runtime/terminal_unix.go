@@ -89,6 +89,17 @@ func (term *Terminal) TerminalWidth() (int, error) {
 func (term *Terminal) Platform() string {
 	const key = "environment_platform"
 	if val, found := term.Cache().Get(key); found {
+
+		if val == "freebsd" {
+			info, err := os.Stat("/usr/local/opnsense")
+			if err == nil {
+				if info.IsDir() {
+					val = "opnsense"
+				}
+			}
+
+		}
+
 		log.Debug(val)
 		return val
 	}
@@ -113,15 +124,6 @@ func (term *Terminal) Platform() string {
 		}
 	}
 
-	if platform == "freebsd" {
-		info, err := os.Stat("/usr/local/opnsense")
-		if err == nil {
-			if info.IsDir() {
-				platform = "opnsense"
-			}
-		}
-
-	}
 
 	log.Debug(platform)
 	return platform
