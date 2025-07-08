@@ -13,6 +13,7 @@ import (
 	"github.com/jandedobbeleer/oh-my-posh/src/config"
 	"github.com/jandedobbeleer/oh-my-posh/src/log"
 	"github.com/jandedobbeleer/oh-my-posh/src/runtime"
+	runtimeOS "github.com/jandedobbeleer/oh-my-posh/src/runtime/os"
 	"github.com/jandedobbeleer/oh-my-posh/src/terminal"
 	"github.com/spf13/cobra"
 )

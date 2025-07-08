@@ -13,6 +13,7 @@ import (
 
 	"github.com/jandedobbeleer/oh-my-posh/src/log"
 	"github.com/jandedobbeleer/oh-my-posh/src/runtime/cmd"
+	runtimeOS "github.com/jandedobbeleer/oh-my-posh/src/runtime/os"
 )
 
 func contains[S ~[]E, E comparable](s S, e E) bool {

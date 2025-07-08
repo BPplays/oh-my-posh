@@ -6,6 +6,7 @@ import (
 	"github.com/jandedobbeleer/oh-my-posh/src/cache"
 	"github.com/jandedobbeleer/oh-my-posh/src/config"
 	"github.com/jandedobbeleer/oh-my-posh/src/shell"
+	runtimeOS "github.com/jandedobbeleer/oh-my-posh/src/runtime/os"
 )
 
 const (
