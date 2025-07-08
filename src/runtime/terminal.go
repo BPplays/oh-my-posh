@@ -22,6 +22,7 @@ import (
 	"github.com/jandedobbeleer/oh-my-posh/src/regex"
 	"github.com/jandedobbeleer/oh-my-posh/src/runtime/cmd"
 	"github.com/jandedobbeleer/oh-my-posh/src/runtime/http"
+	runtimeOS "github.com/jandedobbeleer/oh-my-posh/src/runtime/os"
 	"github.com/jandedobbeleer/oh-my-posh/src/runtime/path"
 
 	disk "github.com/shirou/gopsutil/v3/disk"
@@ -86,7 +87,7 @@ func (term *Terminal) setPwd() {
 	defer log.Trace(time.Now())
 
 	correctPath := func(pwd string) string {
-		if term.GOOS() != WINDOWS {
+		if term.GOOS() != runtimeOS.WINDOWS {
 			return pwd
 		}
 
@@ -543,7 +544,7 @@ func dirMatchesOneOf(dir, home, goos string, regexes []string) bool {
 		return false
 	}
 
-	if goos == WINDOWS {
+	if goos == runtimeOS.WINDOWS {
 		dir = strings.ReplaceAll(dir, "\\", "/")
 		home = strings.ReplaceAll(home, "\\", "/")
 	}
@@ -557,7 +558,7 @@ func dirMatchesOneOf(dir, home, goos string, regexes []string) bool {
 			}
 		}
 		pattern := fmt.Sprintf("^%s$", normalized)
-		if goos == WINDOWS || goos == DARWIN {
+		if goos == runtimeOS.WINDOWS || goos == runtimeOS.DARWIN {
 			pattern = "(?i)" + pattern
 		}
 		matched := regex.MatchString(pattern, dir)

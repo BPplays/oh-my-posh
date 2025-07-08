@@ -10,6 +10,7 @@ import (
 
 	"github.com/jandedobbeleer/oh-my-posh/src/cache"
 	"github.com/jandedobbeleer/oh-my-posh/src/log"
+	runtimeOS "github.com/jandedobbeleer/oh-my-posh/src/runtime/os"
 	"github.com/shirou/gopsutil/v3/host"
 	mem "github.com/shirou/gopsutil/v3/mem"
 	terminal "github.com/wayneashleyberry/terminal-dimensions"
@@ -90,7 +91,7 @@ func (term *Terminal) Platform() string {
 	const key = "environment_platform"
 	if val, found := term.Cache().Get(key); found {
 
-		if val == "freebsd" {
+		if val == runtimeOS.FREEBSD {
 			info, err := os.Stat("/usr/local/opnsense")
 			if err == nil {
 				if info.IsDir() {

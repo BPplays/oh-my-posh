@@ -2,7 +2,7 @@ package segments
 
 import (
 	"github.com/jandedobbeleer/oh-my-posh/src/properties"
-	"github.com/jandedobbeleer/oh-my-posh/src/runtime"
+	runtimeOS "github.com/jandedobbeleer/oh-my-posh/src/runtime/os"
 )
 
 type Os struct {
@@ -29,11 +29,11 @@ func (oi *Os) Template() string {
 func (oi *Os) Enabled() bool {
 	goos := oi.env.GOOS()
 	switch goos {
-	case runtime.WINDOWS:
+	case runtimeOS.WINDOWS:
 		oi.Icon = oi.props.GetString(Windows, "\uE62A")
-	case runtime.DARWIN:
+	case runtimeOS.DARWIN:
 		oi.Icon = oi.props.GetString(MacOS, "\uF179")
-	case runtime.LINUX, runtime.FREEBSD:
+	case runtimeOS.LINUX, runtimeOS.FREEBSD:
 		pf := oi.env.Platform()
 		displayDistroName := oi.props.GetBool(DisplayDistroName, false)
 		if displayDistroName {

@@ -13,12 +13,7 @@ import (
 
 const (
 	UNKNOWN = "unknown"
-	WINDOWS = "windows"
-	DARWIN  = "darwin"
-	LINUX   = "linux"
-	FREEBSD = "freebsd"
 	CMD     = "cmd"
-
 	PRIMARY = "primary"
 )
 
