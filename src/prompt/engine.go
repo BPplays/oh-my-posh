@@ -510,14 +510,14 @@ func New(flags *runtime.Flags) *Engine {
 	case shell.XONSH:
 		// In Xonsh, the behavior of wrapping at the end of a prompt line is inconsistent across different operating systems.
 		// On Windows, it wraps before the last cell on the terminal screen, that is, the last cell is never available for a prompt line.
-		if env.GOOS() == runtime.WINDOWS {
+		if env.GOOS() == runtimeOS.WINDOWS {
 			eng.rectifyTerminalWidth(-1)
 		}
 	case shell.ELVISH:
 		// In Elvish, the case is similar to that in Xonsh.
 		// However, on Windows, we have to reduce the terminal width by 1 again to ensure that newlines are displayed correctly.
 		diff := -1
-		if env.GOOS() == runtime.WINDOWS {
+		if env.GOOS() == runtimeOS.WINDOWS {
 			diff = -2
 		}
 		eng.rectifyTerminalWidth(diff)

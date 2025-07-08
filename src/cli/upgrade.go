@@ -36,9 +36,9 @@ var upgradeCmd = &cobra.Command{
 		}
 
 		supportedPlatforms := []string{
-			runtime.WINDOWS,
-			runtime.DARWIN,
-			runtime.LINUX,
+			runtimeOS.WINDOWS,
+			runtimeOS.DARWIN,
+			runtimeOS.LINUX,
 		}
 
 		if !slices.Contains(supportedPlatforms, stdruntime.GOOS) {

@@ -11,7 +11,7 @@ import (
 	"strings"
 
 	"github.com/jandedobbeleer/oh-my-posh/src/log"
-	"github.com/jandedobbeleer/oh-my-posh/src/runtime"
+	runtimeOS "github.com/jandedobbeleer/oh-my-posh/src/runtime/os"
 )
 
 // This is based on the following key generation and validation.
@@ -35,7 +35,7 @@ var publicKey []byte
 
 func downloadAndVerify(cfg *Config) ([]byte, error) {
 	extension := ""
-	if stdruntime.GOOS == runtime.WINDOWS {
+	if stdruntime.GOOS == runtimeOS.WINDOWS {
 		extension = ".exe"
 	}
 

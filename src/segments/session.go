@@ -33,7 +33,7 @@ func (s *Session) activeSSHSession() bool {
 		}
 	}
 
-	if s.env.Platform() == runtime.WINDOWS {
+	if s.env.Platform() == runtimeOS.WINDOWS {
 		return false
 	}
 

@@ -86,7 +86,7 @@ func TestSessionSegmentTemplate(t *testing.T) {
 			UserName:       "john",
 			SSHSession:     false,
 			WhoAmI:         "sascha   pts/1        2023-11-08 22:56 (89.246.1.1)",
-			Platform:       runtime.WINDOWS,
+			Platform:       runtimeOS.WINDOWS,
 			ComputerName:   "remote",
 			Template:       "{{.UserName}}{{if .SSHSession}} on {{.HostName}}{{end}}",
 		},

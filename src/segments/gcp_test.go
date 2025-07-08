@@ -111,7 +111,7 @@ func TestGetConfigDirectory(t *testing.T) {
 		},
 		{
 			Case:     "Windows",
-			GOOS:     runtime.WINDOWS,
+			GOOS:     runtimeOS.WINDOWS,
 			AppData:  "/Users/posh/.config",
 			Expected: "/Users/posh/.config/gcloud",
 		},

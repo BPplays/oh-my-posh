@@ -23,7 +23,7 @@ func (wr *WindowsRegistry) Template() string {
 }
 
 func (wr *WindowsRegistry) Enabled() bool {
-	if wr.env.GOOS() != runtime.WINDOWS {
+	if wr.env.GOOS() != runtimeOS.WINDOWS {
 		return false
 	}
 

@@ -124,7 +124,7 @@ func TestAzSegment(t *testing.T) {
 			azureRmContext = string(content)
 		}
 
-		env.On("GOOS").Return(runtime.LINUX)
+		env.On("GOOS").Return(runtimeOS.LINUX)
 		env.On("FileContent", filepath.Join(poshHome, ".azure", "azureProfile.json")).Return(azureProfile)
 		env.On("Getenv", "POSH_AZURE_SUBSCRIPTION").Return(azureRmContext)
 		env.On("Getenv", "AZURE_CONFIG_DIR").Return("")

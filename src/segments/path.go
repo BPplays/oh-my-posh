@@ -147,7 +147,7 @@ func (pt *Path) Enabled() bool {
 	pwd := pt.env.Pwd()
 
 	pt.Location = pt.env.Flags().AbsolutePWD
-	if pt.env.GOOS() == runtime.WINDOWS {
+	if pt.env.GOOS() == runtimeOS.WINDOWS {
 		pt.Location = strings.ReplaceAll(pt.Location, `\`, `/`)
 	}
 
@@ -171,7 +171,7 @@ func (pt *Path) setPaths() {
 	}
 
 	pt.cygPath = displayCygpath()
-	pt.windowsPath = pt.env.GOOS() == runtime.WINDOWS && !pt.cygPath
+	pt.windowsPath = pt.env.GOOS() == runtimeOS.WINDOWS && !pt.cygPath
 
 	if len(pt.pathSeparator) == 0 {
 		pt.pathSeparator = path.Separator()
@@ -801,7 +801,7 @@ func (pt *Path) parsePath(inputPath string) (string, string) {
 		}
 	}
 
-	if pt.env.GOOS() == runtime.WINDOWS {
+	if pt.env.GOOS() == runtimeOS.WINDOWS {
 		// Handle a UNC path, if any.
 		pattern := fmt.Sprintf(`^\%[1]s{2}(?P<hostname>[^\%[1]s]+)\%[1]s(?P<sharename>[^\%[1]s]+)(\%[1]s(?P<path>[\s\S]*))?$`, pt.pathSeparator)
 		matches := regex.FindNamedRegexMatch(pattern, inputPath)
@@ -864,7 +864,7 @@ func (pt *Path) normalize(inputPath string) string {
 
 	normalized = path.Clean(normalized)
 
-	if pt.env.GOOS() == runtime.WINDOWS || pt.env.GOOS() == runtime.DARWIN {
+	if pt.env.GOOS() == runtimeOS.WINDOWS || pt.env.GOOS() == runtimeOS.DARWIN {
 		normalized = strings.ToLower(normalized)
 	}
 

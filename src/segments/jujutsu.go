@@ -94,7 +94,7 @@ func (jj *Jujutsu) shouldDisplay(displayStatus bool) bool {
 
 func (jj *Jujutsu) setDir(dir string) {
 	dir = path.ReplaceHomeDirPrefixWithTilde(dir) // align with template PWD
-	if jj.env.GOOS() == runtime.WINDOWS {
+	if jj.env.GOOS() == runtimeOS.WINDOWS {
 		jj.Dir = strings.TrimSuffix(dir, `\.jj`)
 		return
 	}

@@ -10,6 +10,7 @@ import (
 	"github.com/jandedobbeleer/oh-my-posh/src/log"
 	"github.com/jandedobbeleer/oh-my-posh/src/runtime"
 	"github.com/jandedobbeleer/oh-my-posh/src/runtime/path"
+	runtimeOS "github.com/jandedobbeleer/oh-my-posh/src/runtime/os"
 )
 
 const (
@@ -34,7 +35,7 @@ func getExecutablePath(env runtime.Environment) (string, error) {
 	// On Windows, it fails when the excutable is called in MSYS2 for example
 	// which uses unix style paths to resolve the executable's location.
 	// PowerShell knows how to resolve both, so we can swap this without any issue.
-	if env.GOOS() == runtime.WINDOWS {
+	if env.GOOS() == runtimeOS.WINDOWS {
 		executable = strings.ReplaceAll(executable, "\\", "/")
 	}
 

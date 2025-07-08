@@ -170,7 +170,7 @@ func TestFullAndFolderPath(t *testing.T) {
 			tc.PathSeparator = "/"
 		}
 		env.On("PathSeparator").Return(tc.PathSeparator)
-		if tc.GOOS == runtime.WINDOWS {
+		if tc.GOOS == runtimeOS.WINDOWS {
 			env.On("Home").Return(homeDirWindows)
 		} else {
 			env.On("Home").Return(homeDir)
@@ -224,7 +224,7 @@ func TestFullPathCustomMappedLocations(t *testing.T) {
 		env.On("Pwd").Return(tc.Pwd)
 
 		if len(tc.GOOS) == 0 {
-			tc.GOOS = runtime.DARWIN
+			tc.GOOS = runtimeOS.DARWIN
 		}
 
 		env.On("GOOS").Return(tc.GOOS)
@@ -443,7 +443,7 @@ func TestSplitPath(t *testing.T) {
 			root:          tc.Root,
 			relative:      tc.Relative,
 			pathSeparator: "/",
-			windowsPath:   tc.GOOS == runtime.WINDOWS,
+			windowsPath:   tc.GOOS == runtimeOS.WINDOWS,
 		}
 		path.Init(props, env)
 
@@ -518,7 +518,7 @@ func TestAgnosterMaxWidth(t *testing.T) {
 			separator:   "/",
 			folderIcon:  `..`,
 			expected:    "foob/user/docs",
-			goos:        runtime.LINUX,
+			goos:        runtimeOS.LINUX,
 		},
 		{
 			name:        "path shorter than maxWidth, Windows",
@@ -528,7 +528,7 @@ func TestAgnosterMaxWidth(t *testing.T) {
 			folderIcon:  `..`,
 			separator:   `\`,
 			expected:    `..\..\john\Documents`,
-			goos:        runtime.WINDOWS,
+			goos:        runtimeOS.WINDOWS,
 		},
 		{
 			name:        "path shorter than maxWidth, wth root",
@@ -538,7 +538,7 @@ func TestAgnosterMaxWidth(t *testing.T) {
 			folderIcon:  `..`,
 			separator:   "/",
 			expected:    "/foob/user/docs",
-			goos:        runtime.LINUX,
+			goos:        runtimeOS.LINUX,
 		},
 		{
 			name:        "path exactly maxWidth",
@@ -548,7 +548,7 @@ func TestAgnosterMaxWidth(t *testing.T) {
 			folderIcon:  `..`,
 			separator:   "/",
 			expected:    "/foob/user/docs",
-			goos:        runtime.LINUX,
+			goos:        runtimeOS.LINUX,
 		},
 		{
 			name:        "path longer than maxWidth with folder icons",
@@ -558,7 +558,7 @@ func TestAgnosterMaxWidth(t *testing.T) {
 			folderIcon:  "..",
 			separator:   "/",
 			expected:    "../../projects",
-			goos:        runtime.LINUX,
+			goos:        runtimeOS.LINUX,
 		},
 		{
 			name:        "very long path requiring multiple folder replacements",
@@ -568,7 +568,7 @@ func TestAgnosterMaxWidth(t *testing.T) {
 			folderIcon:  "..",
 			separator:   "/",
 			expected:    "../../../../../main",
-			goos:        runtime.LINUX,
+			goos:        runtimeOS.LINUX,
 		},
 		{
 			name:        "path requiring final folder truncation",
@@ -577,7 +577,7 @@ func TestAgnosterMaxWidth(t *testing.T) {
 			displayRoot: false,
 			separator:   "/",
 			expected:    "verylongfolder…",
-			goos:        runtime.LINUX,
+			goos:        runtimeOS.LINUX,
 		},
 		{
 			name:        "Windows path with custom separator",
@@ -587,7 +587,7 @@ func TestAgnosterMaxWidth(t *testing.T) {
 			folderIcon:  "…",
 			separator:   `\`,
 			expected:    `…\…\…\Documents`,
-			goos:        runtime.WINDOWS,
+			goos:        runtimeOS.WINDOWS,
 		},
 		{
 			name:        "single folder path",
@@ -596,7 +596,7 @@ func TestAgnosterMaxWidth(t *testing.T) {
 			displayRoot: false,
 			separator:   "/",
 			expected:    "foob",
-			goos:        runtime.LINUX,
+			goos:        runtimeOS.LINUX,
 		},
 		{
 			name:        "empty relative path",
@@ -605,7 +605,7 @@ func TestAgnosterMaxWidth(t *testing.T) {
 			displayRoot: true,
 			separator:   "/",
 			expected:    "/",
-			goos:        runtime.LINUX,
+			goos:        runtimeOS.LINUX,
 		},
 		{
 			name:        "custom folder icon",
@@ -615,7 +615,7 @@ func TestAgnosterMaxWidth(t *testing.T) {
 			folderIcon:  "⋯",
 			separator:   "/",
 			expected:    "⋯/⋯/⋯/projects",
-			goos:        runtime.LINUX,
+			goos:        runtimeOS.LINUX,
 		},
 		{
 			name:        "maxwidth is smaller than folder name",
@@ -625,7 +625,7 @@ func TestAgnosterMaxWidth(t *testing.T) {
 			folderIcon:  "⋯",
 			separator:   "/",
 			expected:    "p…",
-			goos:        runtime.LINUX,
+			goos:        runtimeOS.LINUX,
 		},
 		{
 			name:        "maxwidth is 0",
@@ -635,7 +635,7 @@ func TestAgnosterMaxWidth(t *testing.T) {
 			folderIcon:  "⋯",
 			separator:   "/",
 			expected:    "…",
-			goos:        runtime.LINUX,
+			goos:        runtimeOS.LINUX,
 		},
 	}
 

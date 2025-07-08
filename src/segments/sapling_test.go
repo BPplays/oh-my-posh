@@ -21,20 +21,20 @@ func TestSetDir(t *testing.T) {
 			Case:     "Linux",
 			Expected: "/usr/sapling/repo",
 			Path:     "/usr/sapling/repo/.sl",
-			GOOS:     runtime.LINUX,
+			GOOS:     runtimeOS.LINUX,
 		},
 		{
 			Case:     "Windows",
 			Expected: "\\usr\\sapling\\repo",
 			Path:     "\\usr\\sapling\\repo\\.sl",
-			GOOS:     runtime.WINDOWS,
+			GOOS:     runtimeOS.WINDOWS,
 		},
 	}
 	for _, tc := range cases {
 		env := new(mock.Environment)
 		env.On("GOOS").Return(tc.GOOS)
 		home := "/usr/home"
-		if tc.GOOS == runtime.WINDOWS {
+		if tc.GOOS == runtimeOS.WINDOWS {
 			home = "\\usr\\home"
 		}
 		env.On("Home").Return(home)
@@ -137,7 +137,7 @@ func TestShouldDisplay(t *testing.T) {
 		env := new(mock.Environment)
 		env.On("HasCommand", "sl").Return(tc.HasSapling)
 		env.On("InWSLSharedDrive").Return(false)
-		env.On("GOOS").Return(runtime.LINUX)
+		env.On("GOOS").Return(runtimeOS.LINUX)
 		env.On("Home").Return("/usr/home/sapling")
 		if tc.InRepo {
 			env.On("HasParentFilePath", ".sl", false).Return(fileInfo, nil)

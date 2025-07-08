@@ -89,7 +89,7 @@ func InstallZIP(data []byte, m *main) ([]string, error) {
 	}
 
 	// Update the font cache when installing fonts on Linux
-	if stdruntime.GOOS == runtime.LINUX || stdruntime.GOOS == runtime.DARWIN {
+	if stdruntime.GOOS == runtimeOS.LINUX || stdruntime.GOOS == runtimeOS.DARWIN {
 		_, _ = cmd.Run("fc-cache", "-f")
 	}
 

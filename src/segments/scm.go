@@ -180,7 +180,7 @@ func (s *scm) fileContent(folder, file string) string {
 
 func (s *scm) convertToWindowsPath(path string) string {
 	// only convert when in Windows, or when in a WSL shared folder and not using the native fallback
-	if s.env.GOOS() == runtime.WINDOWS || (s.IsWslSharedPath && !s.nativeFallback) {
+	if s.env.GOOS() == runtimeOS.WINDOWS || (s.IsWslSharedPath && !s.nativeFallback) {
 		return s.env.ConvertToWindowsPath(path)
 	}
 
@@ -203,7 +203,7 @@ func (s *scm) hasCommand(command string) bool {
 	// when in a WSL shared folder, we must use command.exe and convert paths accordingly
 	// for worktrees, stashes, and path to work, except when native_fallback is set
 	s.IsWslSharedPath = s.env.InWSLSharedDrive()
-	if s.env.GOOS() == runtime.WINDOWS || s.IsWslSharedPath {
+	if s.env.GOOS() == runtimeOS.WINDOWS || s.IsWslSharedPath {
 		command += ".exe"
 	}
 

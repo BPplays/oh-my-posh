@@ -39,7 +39,7 @@ func (e *Engine) RPrompt() string {
 
 	e.rpromptLength = length
 
-	if e.Env.Shell() == shell.ELVISH && e.Env.GOOS() != runtime.WINDOWS {
+	if e.Env.Shell() == shell.ELVISH && e.Env.GOOS() != runtimeOS.WINDOWS {
 		// Workaround to align with a right-aligned block on non-Windows systems.
 		text += " "
 	}

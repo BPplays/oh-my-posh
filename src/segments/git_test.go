@@ -1190,7 +1190,7 @@ func TestGitRepoName(t *testing.T) {
 	for _, tc := range cases {
 		env := new(mock.Environment)
 		env.On("PathSeparator").Return("/")
-		env.On("GOOS").Return(runtime.LINUX)
+		env.On("GOOS").Return(runtimeOS.LINUX)
 
 		g := &Git{
 			scm: scm{

@@ -20,28 +20,28 @@ var testParentCases = []testParentCase{
 		Expected:      "~/",
 		HomePath:      homeDir,
 		Pwd:           homeDir + "/test",
-		GOOS:          runtime.DARWIN,
+		GOOS:          runtimeOS.DARWIN,
 		PathSeparator: "/",
 	},
 	{
 		Case:          "Home folder",
 		HomePath:      homeDir,
 		Pwd:           homeDir,
-		GOOS:          runtime.DARWIN,
+		GOOS:          runtimeOS.DARWIN,
 		PathSeparator: "/",
 	},
 	{
 		Case:          "Home folder with a trailing separator",
 		HomePath:      homeDir,
 		Pwd:           homeDir + "/",
-		GOOS:          runtime.DARWIN,
+		GOOS:          runtimeOS.DARWIN,
 		PathSeparator: "/",
 	},
 	{
 		Case:          "Root",
 		HomePath:      homeDir,
 		Pwd:           "/",
-		GOOS:          runtime.DARWIN,
+		GOOS:          runtimeOS.DARWIN,
 		PathSeparator: "/",
 	},
 	{
@@ -49,7 +49,7 @@ var testParentCases = []testParentCase{
 		Expected:      "/",
 		HomePath:      homeDir,
 		Pwd:           "/usr",
-		GOOS:          runtime.DARWIN,
+		GOOS:          runtimeOS.DARWIN,
 		PathSeparator: "/",
 	},
 }
@@ -642,7 +642,7 @@ var testSplitPathCases = []testSplitPathCase{
 		Case:     "Regular directory",
 		Root:     "/",
 		Relative: "c/d",
-		GOOS:     runtime.DARWIN,
+		GOOS:     runtimeOS.DARWIN,
 		Expected: Folders{
 			{Name: "c", Path: "/c"},
 			{Name: "d", Path: "/c/d"},
@@ -652,7 +652,7 @@ var testSplitPathCases = []testSplitPathCase{
 		Case:         "Home directory - git folder",
 		Root:         "~",
 		Relative:     "c/d",
-		GOOS:         runtime.DARWIN,
+		GOOS:         runtimeOS.DARWIN,
 		GitDir:       &runtime.FileInfo{IsDir: true, ParentFolder: "/a/b/c"},
 		GitDirFormat: "<b>%s</b>",
 		Expected: Folders{
@@ -667,28 +667,28 @@ var testNormalizePathCases = []testNormalizePathCase{
 		Case:     "Linux: home prefix, backslash included",
 		Input:    "~/Bob\\Foo",
 		HomeDir:  homeDir,
-		GOOS:     runtime.LINUX,
+		GOOS:     runtimeOS.LINUX,
 		Expected: homeDir + "/Bob\\Foo",
 	},
 	{
 		Case:     "macOS: home prefix, backslash included",
 		Input:    "~/Bob\\Foo",
 		HomeDir:  homeDir,
-		GOOS:     runtime.DARWIN,
+		GOOS:     runtimeOS.DARWIN,
 		Expected: homeDir + "/bob\\foo",
 	},
 	{
 		Case:     "Linux: absolute",
 		Input:    "/foo/~/bar",
 		HomeDir:  homeDir,
-		GOOS:     runtime.LINUX,
+		GOOS:     runtimeOS.LINUX,
 		Expected: "/foo/~/bar",
 	},
 	{
 		Case:     "Linux: home prefix",
 		Input:    "~/baz",
 		HomeDir:  homeDir,
-		GOOS:     runtime.LINUX,
+		GOOS:     runtimeOS.LINUX,
 		Expected: homeDir + "/baz",
 	},
 }
@@ -749,7 +749,7 @@ func TestReplaceMappedLocations(t *testing.T) {
 		env.On("PathSeparator").Return("/")
 		env.On("Pwd").Return(tc.Pwd)
 		env.On("Shell").Return(shell.FISH)
-		env.On("GOOS").Return(runtime.DARWIN)
+		env.On("GOOS").Return(runtimeOS.DARWIN)
 		env.On("Home").Return("/a/b/k")
 
 		template.Cache = new(cache.Template)

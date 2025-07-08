@@ -61,7 +61,7 @@ func TestWinReg(t *testing.T) {
 
 	for _, tc := range cases {
 		env := new(mock.Environment)
-		env.On("GOOS").Return(runtime.WINDOWS)
+		env.On("GOOS").Return(runtimeOS.WINDOWS)
 		env.On("WindowsRegistryKeyValue", tc.Path).Return(tc.getWRKVOutput, tc.Err)
 
 		props := properties.Map{

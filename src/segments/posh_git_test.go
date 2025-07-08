@@ -185,7 +185,7 @@ func TestPoshGitSegment(t *testing.T) {
 		env := new(mock.Environment)
 		env.On("Getenv", poshGitEnv).Return(tc.PoshGitJSON)
 		env.On("Home").Return("/Users/bill")
-		env.On("GOOS").Return(runtime.LINUX)
+		env.On("GOOS").Return(runtimeOS.LINUX)
 		env.On("RunCommand", "git", []string{"-C", "", "--no-optional-locks", "-c", "core.quotepath=false",
 			"-c", "color.status=false", "remote", "get-url", "origin"}).Return("github.com/cli", nil)
 

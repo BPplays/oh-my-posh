@@ -104,7 +104,7 @@ func (sl *Sapling) CacheKey() (string, bool) {
 func (sl *Sapling) setDir(dir string) {
 	dir = path.ReplaceHomeDirPrefixWithTilde(dir) // align with template PWD
 
-	if sl.env.GOOS() == runtime.WINDOWS {
+	if sl.env.GOOS() == runtimeOS.WINDOWS {
 		sl.Dir = strings.TrimSuffix(dir, `\.sl`)
 		return
 	}

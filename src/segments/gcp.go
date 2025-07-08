@@ -78,7 +78,7 @@ func (g *Gcp) getConfigDirectory() string {
 		return cfgDir
 	}
 
-	if g.env.GOOS() == runtime.WINDOWS {
+	if g.env.GOOS() == runtimeOS.WINDOWS {
 		return path.Join(g.env.Getenv("APPDATA"), "gcloud")
 	}
 

@@ -92,7 +92,7 @@ func (hg *Mercurial) shouldDisplay() bool {
 
 func (hg *Mercurial) setDir(dir string) {
 	dir = path.ReplaceHomeDirPrefixWithTilde(dir) // align with template PWD
-	if hg.env.GOOS() == runtime.WINDOWS {
+	if hg.env.GOOS() == runtimeOS.WINDOWS {
 		hg.Dir = strings.TrimSuffix(dir, `\.hg`)
 		return
 	}

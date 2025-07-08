@@ -426,7 +426,7 @@ func (g *Git) getBareRepoInfo() {
 
 func (g *Git) setDir(dir string) {
 	dir = path.ReplaceHomeDirPrefixWithTilde(dir) // align with template PWD
-	if g.env.GOOS() == runtime.WINDOWS {
+	if g.env.GOOS() == runtimeOS.WINDOWS {
 		g.Dir = strings.TrimSuffix(dir, `\.git`)
 		return
 	}

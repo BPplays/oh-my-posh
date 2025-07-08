@@ -12,6 +12,7 @@ import (
 	"github.com/jandedobbeleer/oh-my-posh/src/maps"
 	"github.com/jandedobbeleer/oh-my-posh/src/runtime"
 	"github.com/jandedobbeleer/oh-my-posh/src/runtime/path"
+	runtimeOS "github.com/jandedobbeleer/oh-my-posh/src/runtime/os"
 )
 
 var (
@@ -55,7 +56,7 @@ func loadCache(vars maps.Simple[any], aliases *maps.Config) {
 	Cache.PSWD = env.Flags().PSWD
 
 	Cache.Folder = path.Base(pwd)
-	if env.GOOS() == runtime.WINDOWS && strings.HasSuffix(Cache.Folder, ":") {
+	if env.GOOS() == runtimeOS.WINDOWS && strings.HasSuffix(Cache.Folder, ":") {
 		Cache.Folder += `\`
 	}
 
@@ -66,7 +67,7 @@ func loadCache(vars maps.Simple[any], aliases *maps.Config) {
 
 	goos := env.GOOS()
 	Cache.OS = goos
-	if goos == runtime.LINUX {
+	if goos == runtimeOS.LINUX {
 		Cache.OS = env.Platform()
 	}
 
