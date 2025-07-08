@@ -8,7 +8,7 @@ import (
 
 	"github.com/jandedobbeleer/oh-my-posh/src/log"
 	"github.com/jandedobbeleer/oh-my-posh/src/properties"
-	"github.com/jandedobbeleer/oh-my-posh/src/runtime"
+	runtimeOS "github.com/jandedobbeleer/oh-my-posh/src/runtime/os"
 	"github.com/jandedobbeleer/oh-my-posh/src/template"
 )
 

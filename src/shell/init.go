@@ -9,8 +9,8 @@ import (
 
 	"github.com/jandedobbeleer/oh-my-posh/src/log"
 	"github.com/jandedobbeleer/oh-my-posh/src/runtime"
-	"github.com/jandedobbeleer/oh-my-posh/src/runtime/path"
 	runtimeOS "github.com/jandedobbeleer/oh-my-posh/src/runtime/os"
+	"github.com/jandedobbeleer/oh-my-posh/src/runtime/path"
 )
 
 const (

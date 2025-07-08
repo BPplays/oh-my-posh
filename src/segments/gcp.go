@@ -5,7 +5,7 @@ import (
 	"path"
 
 	"github.com/jandedobbeleer/oh-my-posh/src/log"
-	"github.com/jandedobbeleer/oh-my-posh/src/runtime"
+	runtimeOS "github.com/jandedobbeleer/oh-my-posh/src/runtime/os"
 
 	"gopkg.in/ini.v1"
 )

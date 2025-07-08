@@ -4,6 +4,7 @@ import (
 	"errors"
 
 	"github.com/jandedobbeleer/oh-my-posh/src/runtime"
+	runtimeOS "github.com/jandedobbeleer/oh-my-posh/src/runtime/os"
 	"github.com/jandedobbeleer/oh-my-posh/src/shell"
 )
 

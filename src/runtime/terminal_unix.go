@@ -125,7 +125,6 @@ func (term *Terminal) Platform() string {
 		}
 	}
 
-
 	log.Debug(platform)
 	return platform
 }
