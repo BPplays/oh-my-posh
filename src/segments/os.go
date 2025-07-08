@@ -73,6 +73,7 @@ func (oi *Os) getDistroIcon(distro string) string {
 		"nixos":               "\uF313",
 		"opensuse":            "\uF314",
 		"opensuse-tumbleweed": "\uF314",
+		"opnsense":            "\uF314",
 		"raspbian":            "\uF315",
 		"redhat":              "\uF316",
 		"rocky":               "\uF32B",

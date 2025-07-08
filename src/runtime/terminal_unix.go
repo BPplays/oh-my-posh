@@ -10,6 +10,7 @@ import (
 
 	"github.com/jandedobbeleer/oh-my-posh/src/cache"
 	"github.com/jandedobbeleer/oh-my-posh/src/log"
+	"github.com/jandedobbeleer/oh-my-posh/src/runtime"
 	"github.com/shirou/gopsutil/v3/host"
 	mem "github.com/shirou/gopsutil/v3/mem"
 	terminal "github.com/wayneashleyberry/terminal-dimensions"
@@ -111,6 +112,16 @@ func (term *Terminal) Platform() string {
 		if strings.Contains(strings.ToLower(lsbInfo), "manjaro") {
 			platform = "manjaro"
 		}
+	}
+
+	if platform == runtime.FREEBSD {
+		info, err := os.Stat("/usr/local/opnsense")
+		if err == nil {
+			if info.IsDir() {
+				platform = "opnsense"
+			}
+		}
+
 	}
 
 	log.Debug(platform)
