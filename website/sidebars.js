@@ -38,6 +38,7 @@ export default {
         "configuration/secondary-prompt",
         "configuration/debug-prompt",
         "configuration/transient",
+        "configuration/streaming",
         "configuration/line-error",
         "configuration/tooltips",
         "configuration/sample",
@@ -55,6 +56,7 @@ export default {
           items: [
             "segments/cli/angular",
             "segments/cli/argocd",
+            "segments/cli/aspire",
             "segments/cli/aurelia",
             "segments/cli/bazel",
             "segments/cli/buf",
@@ -62,11 +64,13 @@ export default {
             "segments/cli/claude",
             "segments/cli/cmake",
             "segments/cli/copilot",
+            "segments/cli/copilot-cli",
             "segments/cli/deno",
             "segments/cli/docker",
             "segments/cli/firebase",
             "segments/cli/flutter",
             "segments/cli/gitversion",
+            "segments/cli/gradle",
             "segments/cli/helm",
             "segments/cli/kubectl",
             "segments/cli/mvn",
@@ -79,6 +83,7 @@ export default {
             "segments/cli/react",
             "segments/cli/svelte",
             "segments/cli/talosctl",
+            "segments/cli/taskwarrior",
             "segments/cli/tauri",
             "segments/cli/terraform",
             "segments/cli/ui5tooling",
@@ -86,6 +91,7 @@ export default {
             "segments/cli/unity",
             "segments/cli/xmake",
             "segments/cli/yarn",
+            "segments/cli/zvm",
           ]
         },
         {
@@ -111,6 +117,7 @@ export default {
           collapsed: true,
           items: [
             "segments/health/nightscout",
+            "segments/health/ramadan",
             "segments/health/strava",
             "segments/health/withings",
           ]
@@ -191,6 +198,7 @@ export default {
             "segments/system/text",
             "segments/system/time",
             "segments/system/upgrade",
+            "segments/system/vimode",
             "segments/system/winget",
             "segments/system/winreg",
           ]
@@ -206,6 +214,7 @@ export default {
             "segments/web/ipify",
             "segments/web/nba",
             "segments/web/owm",
+            "segments/web/todoist",
             "segments/web/wakatime",
           ]
         },

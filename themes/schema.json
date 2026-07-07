@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "type": "object",
   "title": "The Oh My Posh theme definition",
@@ -368,6 +368,7 @@
           "enum": [
             "angular",
             "argocd",
+            "aspire",
             "aurelia",
             "aws",
             "az",
@@ -386,6 +387,7 @@
             "clojure",
             "cmake",
             "copilot",
+            "copilot_cli",
             "connection",
             "crystal",
             "dart",
@@ -402,6 +404,7 @@
             "git",
             "gitversion",
             "go",
+            "gradle",
             "haskell",
             "helm",
             "http",
@@ -437,6 +440,7 @@
             "python",
             "quasar",
             "r",
+            "ramadan",
             "react",
             "root",
             "ruby",
@@ -453,16 +457,19 @@
             "swift",
             "sysinfo",
             "talosctl",
+            "taskwarrior",
             "tauri",
             "terraform",
             "text",
             "time",
+            "todoist",
             "ui5tooling",
             "umbraco",
             "unity",
             "upgrade",
             "v",
             "vala",
+            "vimode",
             "wakatime",
             "winget",
             "winreg",
@@ -470,7 +477,8 @@
             "xmake",
             "yarn",
             "ytm",
-            "zig"
+            "zig",
+            "zvm"
           ]
         },
         "style": {
@@ -591,10 +599,17 @@
               "default": "folder",
               "enum": [
                 "folder",
-                "session"
+                "session",
+                "device"
               ]
             }
           }
+        },
+        "placeholder": {
+          "type": "string",
+          "title": "Placeholder text",
+          "description": "Text to display while the segment is loading in streaming mode. See https://ohmyposh.dev/docs/experimental/streaming",
+          "default": "..."
         }
       },
       "allOf": [
@@ -643,6 +658,32 @@
           "then": {
             "title": "ArgoCD Segment",
             "description": "https://ohmyposh.dev/docs/segments/cli/argocd"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "aspire"
+              }
+            }
+          },
+          "then": {
+            "title": "Aspire Segment",
+            "description": "https://ohmyposh.dev/docs/segments/cli/aspire",
+            "properties": {
+              "options": {
+                "properties": {
+                  "fetch_running": {
+                    "type": "boolean",
+                    "title": "Fetch Running",
+                    "description": "Query aspire ps to determine whether the resolved AppHost is running",
+                    "default": true
+                  }
+                },
+                "unevaluatedProperties": false
+              }
+            }
           }
         },
         {
@@ -698,9 +739,15 @@
                     "title": "Display Default User Profile",
                     "description": "Display the segment when default user or not",
                     "default": true
+                  },
+                  "display_access_key_id": {
+                    "type": "boolean",
+                    "title": "Display Access Key ID",
+                    "description": "Populate .AccessKeyID from AWS_ACCESS_KEY_ID, the AWS credentials file, or the AWS config file",
+                    "default": false
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -730,7 +777,7 @@
                     ]
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -780,7 +827,7 @@
                     ]
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -830,7 +877,7 @@
                     "default": ""
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -1007,7 +1054,7 @@
                     "default": "\uf187"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -1101,7 +1148,7 @@
                     "$ref": "#/definitions/http_timeout"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -1211,7 +1258,7 @@
                     }
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -1305,7 +1352,21 @@
             "description": "https://ohmyposh.dev/docs/segments/cli/claude",
             "properties": {
               "options": {
-                "additionalProperties": false
+                "properties": {
+                  "gauge_marked_char": {
+                    "type": "string",
+                    "title": "Gauge marked character",
+                    "description": "The character used for the filled part of the token usage gauge",
+                    "default": "▰"
+                  },
+                  "gauge_unmarked_char": {
+                    "type": "string",
+                    "title": "Gauge unmarked character",
+                    "description": "The character used for the empty part of the token usage gauge",
+                    "default": "▱"
+                  }
+                },
+                "unevaluatedProperties": false
               }
             }
           }
@@ -1328,7 +1389,39 @@
                     "$ref": "#/definitions/http_timeout"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "copilot_cli"
+              }
+            }
+          },
+          "then": {
+            "title": "Copilot CLI Segment",
+            "description": "https://ohmyposh.dev/docs/segments/cli/copilot-cli",
+            "properties": {
+              "options": {
+                "properties": {
+                  "gauge_marked_char": {
+                    "type": "string",
+                    "title": "Gauge marked character",
+                    "description": "The character used for the filled part of the token usage gauge",
+                    "default": "▰"
+                  },
+                  "gauge_unmarked_char": {
+                    "type": "string",
+                    "title": "Gauge unmarked character",
+                    "description": "The character used for the empty part of the token usage gauge",
+                    "default": "▱"
+                  }
+                },
+                "unevaluatedProperties": false
               }
             }
           }
@@ -1358,27 +1451,9 @@
                       "bluetooth"
                     ],
                     "default": "wifi|ethernet"
-                  },
-                  "unit": {
-                    "type": "string",
-                    "title": "Transfer speed unit",
-                    "enum": [
-                      "none",
-                      "b",
-                      "bps",
-                      "K",
-                      "Kbps",
-                      "M",
-                      "Mbps",
-                      "G",
-                      "Gbps",
-                      "T",
-                      "Tbps"
-                    ],
-                    "default": "none"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -1540,7 +1615,8 @@
                     "$ref": "#/definitions/display_mode",
                     "enum": [
                       "files",
-                      "context"
+                      "context",
+                      "environment"
                     ]
                   },
                   "extensions": {
@@ -1557,9 +1633,21 @@
                     "title": "Fetch Context",
                     "description": "Fetch the Docker context",
                     "default": true
+                  },
+                  "docker_command": {
+                    "type": "string",
+                    "title": "Docker Command",
+                    "description": "Command used to call Docker",
+                    "default": "docker"
+                  },
+                  "filter": {
+                    "type": "string",
+                    "title": "Filter",
+                    "description": "Filter passed to docker ps. See https://docs.docker.com/reference/cli/docker/container/ls/#filter",
+                    "default": ""
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -1672,7 +1760,7 @@
                     "default": false
                   },
                   "threshold": {
-                    "type": "number",
+                    "type": "integer",
                     "title": "Threshold",
                     "description": "minimum duration (milliseconds) required to enable this segment",
                     "default": 500
@@ -1690,12 +1778,14 @@
                       "houston",
                       "amarillo",
                       "round",
-                      "lucky7"
+                      "lucky7",
+                      "iso8601",
+                      "iso8601ms"
                     ],
                     "default": "austin"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -1824,7 +1914,7 @@
                     "$ref": "#/definitions/native_fallback"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -2046,7 +2136,7 @@
                     "$ref": "#/definitions/native_fallback"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -2108,6 +2198,41 @@
                     "default": [
                       "mod",
                       "go"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "gradle"
+              }
+            }
+          },
+          "then": {
+            "title": "Gradle Segment",
+            "description": "https://ohmyposh.dev/docs/segments/cli/gradle",
+            "properties": {
+              "options": {
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/language_options"
+                  }
+                ],
+                "properties": {
+                  "extensions": {
+                    "default": [
+                      "*.gradle",
+                      "*.gradle.kts"
+                    ]
+                  },
+                  "tooling": {
+                    "default": [
+                      "gradle"
                     ]
                   }
                 }
@@ -2188,7 +2313,7 @@
                     "default": "always"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -2224,7 +2349,7 @@
                     "default": "GET"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -2257,7 +2382,7 @@
                     "default": "24h"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -2359,7 +2484,7 @@
                     "$ref": "#/definitions/status_formats"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -2473,7 +2598,7 @@
                     "default": {}
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -2496,13 +2621,13 @@
                     "type": "string",
                     "title": "Playing Icon",
                     "description": "Text/icon to show when playing",
-                    "default": "\uE602 "
+                    "default": "\ue602 "
                   },
                   "stopped_icon": {
                     "type": "string",
                     "title": "Stopped Icon",
                     "description": "Text/icon to show when stopped",
-                    "default": "\uF04D "
+                    "default": "\uf04d "
                   },
                   "api_key": {
                     "type": "string",
@@ -2520,7 +2645,7 @@
                     "$ref": "#/definitions/http_timeout"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -2593,7 +2718,7 @@
                     "$ref": "#/definitions/native_fallback"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -2631,7 +2756,7 @@
                   },
                   "extensions": {
                     "default": [
-                      "*.\ud83d\udd25",
+                      "*.🔥",
                       "*.mojo",
                       "mojoproject.toml"
                     ]
@@ -2726,7 +2851,81 @@
                     "default": {}
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "ramadan"
+              }
+            }
+          },
+          "then": {
+            "title": "Ramadan Segment",
+            "description": "https://ohmyposh.dev/docs/segments/health/ramadan",
+            "properties": {
+              "options": {
+                "properties": {
+                  "latitude": {
+                    "type": "number",
+                    "title": "Latitude",
+                    "description": "Latitude for prayer time calculation",
+                    "default": 0
+                  },
+                  "longitude": {
+                    "type": "number",
+                    "title": "Longitude",
+                    "description": "Longitude for prayer time calculation",
+                    "default": 0
+                  },
+                  "city": {
+                    "type": "string",
+                    "title": "City",
+                    "description": "City name for location lookup (takes precedence over latitude/longitude)",
+                    "default": ""
+                  },
+                  "country": {
+                    "type": "string",
+                    "title": "Country",
+                    "description": "Country name or ISO 3166 alpha-2 code (required when using city)",
+                    "default": ""
+                  },
+                  "method": {
+                    "type": "integer",
+                    "title": "Calculation Method",
+                    "description": "Prayer calculation method ID (0-23). See https://aladhan.com/calculation-methods",
+                    "default": 3
+                  },
+                  "school": {
+                    "type": "integer",
+                    "title": "Madhab School",
+                    "description": "0 = Shafi (standard), 1 = Hanafi",
+                    "default": 0
+                  },
+                  "hide_outside_ramadan": {
+                    "type": "boolean",
+                    "title": "Hide Outside Ramadan",
+                    "description": "Hide the segment when not in Ramadan",
+                    "default": true
+                  },
+                  "first_roza_date": {
+                    "type": "string",
+                    "title": "First Roza Date",
+                    "description": "Override first day of Ramadan as YYYY-MM-DD for local moon sighting",
+                    "default": ""
+                  },
+                  "http_timeout": {
+                    "type": "integer",
+                    "title": "HTTP request timeout",
+                    "description": "Milliseconds to use for HTTP request timeouts",
+                    "default": 20
+                  }
+                },
+                "unevaluatedProperties": false
               }
             }
           }
@@ -2761,7 +2960,7 @@
                     "$ref": "#/definitions/http_timeout"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -3215,9 +3414,21 @@
                     "title": "Ubuntu Icon",
                     "description": "The icon to use for Ubuntu",
                     "default": "\uf31b"
+                  },
+                  "void": {
+                    "type": "string",
+                    "title": "Void Icon",
+                    "description": "The icon to use for Void",
+                    "default": "\uf32e"
+                  },
+                  "zorin": {
+                    "type": "string",
+                    "title": "Zorin Icon",
+                    "description": "The icon to use for Zorin OS",
+                    "default": "\uf32f"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -3263,7 +3474,7 @@
                     "$ref": "#/definitions/http_timeout"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -3338,6 +3549,12 @@
                     "description": "Custom glyph/text for specific paths",
                     "default": {}
                   },
+                  "mapped_locations_enabled": {
+                    "type": "boolean",
+                    "title": "Enable the Mapped Locations feature",
+                    "description": "Replace known locations in the path with the replacements before applying the style.",
+                    "default": true
+                  },
                   "max_depth": {
                     "type": "integer",
                     "title": "Maximum Depth",
@@ -3352,12 +3569,6 @@
                     "title": "Maximum Width",
                     "description": "Maximum path width to display for powerlevel style",
                     "default": 0
-                  },
-                  "mapped_locations_enabled": {
-                    "type": "boolean",
-                    "title": "Enable the Mapped Locations feature",
-                    "description": "Replace known locations in the path with the replacements before applying the style.",
-                    "default": true
                   },
                   "mixed_threshold": {
                     "type": "integer",
@@ -3420,6 +3631,12 @@
                     "description": "Display the Cygwin (Linux) style path using cygpath -u $PWD.",
                     "default": false
                   },
+                  "display_root": {
+                    "type": "boolean",
+                    "title": "Display the root directory (/) on Unix systems",
+                    "description": "Display the root directory (/) on Unix systems.",
+                    "default": false
+                  },
                   "dir_length": {
                     "type": "integer",
                     "title": "Directory Length",
@@ -3433,7 +3650,7 @@
                     "default": 1
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -3564,7 +3781,7 @@
                     "$ref": "#/definitions/mapped_branches"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -3655,8 +3872,7 @@
                     "description": "Always show the segment",
                     "default": false
                   }
-                },
-                "additionalProperties": false
+                }
               }
             }
           }
@@ -3688,7 +3904,7 @@
                     "default": false
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -4005,7 +4221,7 @@
                     "$ref": "#/definitions/native_fallback"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -4020,20 +4236,7 @@
           },
           "then": {
             "title": "Session Segment",
-            "description": "https://ohmyposh.dev/docs/segments/system/session",
-            "properties": {
-              "options": {
-                "properties": {
-                  "ssh_icon": {
-                    "type": "string",
-                    "title": "SSH Icon",
-                    "description": "Text/icon to display first when in an active SSH session",
-                    "default": "\uf817"
-                  }
-                },
-                "additionalProperties": false
-              }
-            }
+            "description": "https://ohmyposh.dev/docs/segments/system/session"
           }
         },
         {
@@ -4057,14 +4260,14 @@
                       "type": "string"
                     },
                     "example": {
-                      "bash": "󱆃",
+                      "bash": "\udb84\udd83",
                       "zsh": "",
                       "pwsh": "",
                       "shell": "$"
                     }
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -4090,7 +4293,7 @@
                     "default": true
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -4126,9 +4329,15 @@
                     "title": "Stopped Icon",
                     "description": "Text/icon to show when stopped",
                     "default": "\uf04d "
+                  },
+                  "ad_icon": {
+                    "type": "string",
+                    "title": "Advertisement Icon",
+                    "description": "Text/icon to show when an advertisement is playing (Windows/WSL)",
+                    "default": "\ueebb "
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -4157,7 +4366,7 @@
                     "type": "string",
                     "title": "Status Template",
                     "description": "The template to use for the status segment",
-                    "default": "|"
+                    "default": "{{ .Code }}"
                   },
                   "status_separator": {
                     "type": "string",
@@ -4166,7 +4375,7 @@
                     "default": "|"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -4228,7 +4437,7 @@
                     "$ref": "#/definitions/expires_in"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -4294,7 +4503,7 @@
                     "$ref": "#/definitions/native_fallback"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -4356,7 +4565,7 @@
                     "default": 2
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -4417,6 +4626,46 @@
           "if": {
             "properties": {
               "type": {
+                "const": "taskwarrior"
+              }
+            }
+          },
+          "then": {
+            "title": "Taskwarrior Segment",
+            "description": "https://ohmyposh.dev/docs/segments/cli/taskwarrior",
+            "properties": {
+              "options": {
+                "properties": {
+                  "command": {
+                    "type": "string",
+                    "title": "Taskwarrior Command",
+                    "description": "The taskwarrior command to use",
+                    "default": "task"
+                  },
+                  "commands": {
+                    "type": "object",
+                    "title": "Commands",
+                    "description": "Map of name to Taskwarrior arguments; the trimmed stdout of each invocation is exposed as .Commands.<Name> in the template",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "default": {
+                      "due": "+PENDING due.before:tomorrow count",
+                      "scheduled": "+PENDING scheduled.before:tomorrow count",
+                      "waiting": "+WAITING count",
+                      "context": "_get rc.context"
+                    }
+                  }
+                },
+                "unevaluatedProperties": false
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
                 "const": "terraform"
               }
             }
@@ -4440,7 +4689,7 @@
                     "default": false
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -4479,7 +4728,35 @@
                     "default": "15:04:05"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "todoist"
+              }
+            }
+          },
+          "then": {
+            "title": "Todoist Segment",
+            "description": "https://ohmyposh.dev/docs/segments/web/todoist",
+            "properties": {
+              "options": {
+                "properties": {
+                  "api_key": {
+                    "type": "string",
+                    "title": "API Key",
+                    "description": "API Key (Required)",
+                    "default": "."
+                  },
+                  "http_timeout": {
+                    "$ref": "#/definitions/http_timeout"
+                  }
+                }
               }
             }
           }
@@ -4549,7 +4826,7 @@
                     "$ref": "#/definitions/http_timeout"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -4570,10 +4847,10 @@
                 "properties": {
                   "cache_duration": {
                     "$ref": "#/definitions/cache_duration",
-                    "default": "none"
+                    "default": "168h"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -4650,6 +4927,19 @@
           "if": {
             "properties": {
               "type": {
+                "const": "vimode"
+              }
+            }
+          },
+          "then": {
+            "title": "Vi mode",
+            "description": "https://ohmyposh.dev/docs/segments/system/vimode"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
                 "const": "wakatime"
               }
             }
@@ -4670,7 +4960,7 @@
                     "$ref": "#/definitions/http_timeout"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -4715,7 +5005,7 @@
                     "default": ""
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -4747,7 +5037,7 @@
                     "$ref": "#/definitions/expires_in"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -4863,7 +5153,7 @@
                     "$ref": "#/definitions/http_timeout"
                   }
                 },
-                "additionalProperties": false
+                "unevaluatedProperties": false
               }
             }
           }
@@ -4897,6 +5187,31 @@
                     "default": [
                       "zig"
                     ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "zvm"
+              }
+            }
+          },
+          "then": {
+            "title": "ZVM Segment",
+            "description": "https://ohmyposh.dev/docs/segments/cli/zvm",
+            "properties": {
+              "options": {
+                "properties": {
+                  "zigicon": {
+                    "type": "string",
+                    "title": "Zig Icon",
+                    "description": "icon to display before the version",
+                    "default": "ZVM"
                   }
                 }
               }
@@ -4978,6 +5293,12 @@
     },
     "terminal_background": {
       "$ref": "#/definitions/color"
+    },
+    "streaming": {
+      "type": "integer",
+      "title": "Streaming Mode",
+      "description": "https://ohmyposh.dev/docs/experimental/streaming",
+      "default": 100
     },
     "blocks": {
       "type": "array",
